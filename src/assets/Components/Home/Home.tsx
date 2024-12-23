@@ -4,12 +4,12 @@ import AOS from "aos";
 import "aos/dist/aos.css";
 import { useEffect } from "react";
 
-// تسجيل عناصر Chart.js
+
 ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, BarElement, Title, Tooltip, Legend, ArcElement);
 
 export default function Home() {
   useEffect(() => {
-    AOS.init(); // تفعيل الرسوم المتحركة
+    AOS.init(); 
   }, []);
 
   const lineData = {
@@ -51,7 +51,7 @@ export default function Home() {
       <div className="m-5">
         <h3 className="text-2xl font-bold" data-aos="fade-up">Dashboard Home</h3>
       </div>
-      {/* البطاقات */}
+  
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 m-5">
         <div
           className="p-3 bg-white rounded shadow-xl h-[120px] flex flex-col justify-between items-start"
@@ -75,7 +75,7 @@ export default function Home() {
           <p className="text-lg text-[#6A67FE] font-bold">45</p>
         </div>
       </div>
-      {/* المخططات */}
+   
       <div className="m-5 grid grid-cols-1 sm:grid-cols-2 gap-4">
         <div className="p-3 bg-white rounded shadow-xl h-[250px]" data-aos="fade-right">
           <Line data={lineData} />
@@ -84,7 +84,7 @@ export default function Home() {
           <Bar data={barData} />
         </div>
       </div>
-      {/* المخطط الدائري */}
+    
       <div className="m-5 grid grid-cols-1 sm:grid-cols-2 gap-4">
         <div className="p-3 bg-white rounded shadow-xl h-[300px]" data-aos="fade-up">
           <Pie data={pieData} />

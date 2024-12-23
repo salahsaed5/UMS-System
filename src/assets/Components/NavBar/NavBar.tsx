@@ -7,7 +7,7 @@ export default function NavBar() {
   const {userData }:any=useContext(authContext);
   return (
     <>
-      <nav className="bg-white  ">
+      <nav className="bg-white py-3  ">
         <div className=" flex  items-center justify-between mx-auto p-4">
           <Link
             to="/dashboard"
@@ -17,7 +17,7 @@ export default function NavBar() {
               UMS
             </h1>
           </Link>
-          <h1 className="text-2xl text-gray-600"> Wellcome {userData?.firstName}</h1>
+          <h1 className="text-2xl text-gray-600 font-bold "> Wellcome <span className="text-[#feae00e0]"> {userData?.firstName}</span></h1>
         </div>
       </nav>
     </>
