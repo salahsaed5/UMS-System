@@ -40,7 +40,7 @@ export default function UsersList() {
     try {
       await axios.delete(`https://dummyjson.com/users/${userId}`);
       setOpenModal(false);
-      toast.success("User is deleted successfully !", {
+      toast.success("User is deleted successfully!", {
         transition: Bounce,
       });
     } catch (error) {
@@ -60,8 +60,8 @@ export default function UsersList() {
         <Loader />
       ) : (
         <section className="w-full bg-[#f8f8f8] py-4">
-          <div className="flex justify-between items-center m-5">
-            <h3 className="font-bold">User List</h3>
+          <div className="flex justify-between items-center m-5 flex-col sm:flex-row">
+            <h3 className="font-bold text-lg mb-3 sm:mb-0">User List</h3>
             <button
               onClick={navigateToAddUser}
               className="font-medium text-sm px-5 bg-[#FEAF00] py-2 rounded-sm"
@@ -71,91 +71,74 @@ export default function UsersList() {
           </div>
           <hr className="m-5" />
 
-          <div className="relative overflow-x-auto m-5">
-            <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
-              <thead className="text-xs text-[#ACACAC] uppercase dark:text-gray-400">
+          <div className="relative overflow-x-auto m-5 shadow-md sm:rounded-lg">
+            <table className="w-full text-sm text-left text-gray-500">
+              <thead className="text-xs text-gray-700 uppercase bg-gray-50">
                 <tr>
-                  <th scope="col" className="px-6 py-3">
-                    {"       "}
-                  </th>
-                  <th scope="col" className="px-6 py-3">
-                    Name
-                  </th>
-                  <th scope="col" className="px-6 py-3">
-                    Email
-                  </th>
-                  <th scope="col" className="px-6 py-3">
-                    Phone
-                  </th>
-                  <th scope="col" className="px-6 py-3">
-                    Enroll Number
-                  </th>
-                  <th scope="col" className="px-6 py-3">
-                    Date of admission
-                  </th>
-                  <th scope="col" className="px-6 py-3">
-                    {"       "}
-                  </th>
+                  <th scope="col" className="px-6 py-3">Profile</th>
+                  <th scope="col" className="px-6 py-3">Name</th>
+                  <th scope="col" className="px-6 py-3">Email</th>
+                  <th scope="col" className="px-6 py-3">Phone</th>
+                  <th scope="col" className="px-6 py-3">Enroll Number</th>
+                  <th scope="col" className="px-6 py-3">Date of Admission</th>
+                  <th scope="col" className="px-6 py-3">Actions</th>
                 </tr>
               </thead>
               <tbody>
                 {users.map((user: any, idx: number) => (
-                  <tr key={idx} className="bg-white border-8 border-[#f8f8f8]">
-                    <th
-                      scope="row"
-                      className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
-                    >
-                      <img src={user.image} className="w-1/3" alt="" />
+                  <tr
+                    key={idx}
+                    className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50"
+                  >
+                    <th scope="row" className="px-6 py-4">
+                      <img src={user.image} className="w-10 h-10 rounded-full" alt="" />
                     </th>
                     <td className="px-6 py-4">{user.firstName}</td>
                     <td className="px-6 py-4">{user.email}</td>
                     <td className="px-6 py-4">{user.phone}</td>
-                    <td className="px-6 py-4">{user.ein}</td>
+                    <td className="px-6 py-4">{user.ein || "N/A"}</td>
                     <td className="px-6 py-4">{user.birthDate}</td>
-                    <td className=" ">
+                    <td className="px-6 py-4 flex gap-2">
                       <Link to={`/dashboard/updtae-user/${user.id}`}>
-                      <LuPencil 
-                        size={17}
-                        color="#FEAF00"
-                        className="inline mx-2 cursor-pointer"
-                      /></Link>
+                        <LuPencil size={17} color="#FEAF00" className="cursor-pointer" />
+                      </Link>
                       <SlTrash
                         onClick={() => handelShow(user)}
                         size={17}
                         color="#FEAF00"
-                        className="inline mx-2 cursor-pointer"
+                        className="cursor-pointer"
                       />
                     </td>
                   </tr>
                 ))}
               </tbody>
             </table>
-            <Modal
-              show={openModal}
-              size="md"
-              onClose={() => setOpenModal(false)}
-              popup
-            >
-              <Modal.Header />
-              <Modal.Body>
-                <div className="text-center">
-                  <HiOutlineExclamationCircle className="mx-auto mb-4 h-14 w-14 text-gray-400 dark:text-gray-200" />
-                  <h3 className="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">
-                    Are you sure you want to delete {userData?.firstName}{" "}
-                    {userData?.lastName}?
-                  </h3>
-                  <div className="flex justify-center gap-4">
-                    <Button color="failure" onClick={() => deleteUser()}>
-                      {"Yes, I'm sure"}
-                    </Button>
-                    <Button color="gray" onClick={() => setOpenModal(false)}>
-                      No, cancel
-                    </Button>
-                  </div>
-                </div>
-              </Modal.Body>
-            </Modal>
           </div>
+
+          <Modal
+            show={openModal}
+            size="md"
+            onClose={() => setOpenModal(false)}
+            popup
+          >
+            <Modal.Header />
+            <Modal.Body>
+              <div className="text-center">
+                <HiOutlineExclamationCircle className="mx-auto mb-4 h-14 w-14 text-gray-400" />
+                <h3 className="mb-5 text-lg font-normal text-gray-500">
+                  Are you sure you want to delete {userData?.firstName} {userData?.lastName}?
+                </h3>
+                <div className="flex justify-center gap-4">
+                  <Button color="failure" onClick={() => deleteUser()}>
+                    {"Yes, I'm sure"}
+                  </Button>
+                  <Button color="gray" onClick={() => setOpenModal(false)}>
+                    No, cancel
+                  </Button>
+                </div>
+              </div>
+            </Modal.Body>
+          </Modal>
         </section>
       )}
     </>
