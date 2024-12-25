@@ -57,7 +57,7 @@ function App() {
           element: <ProtectedRoute><UsersList /></ProtectedRoute>,
         },
         {
-          path: "updtae-user/:id",
+          path: "update-user/:id",
           element: <ProtectedRoute><UpdateUser /></ProtectedRoute>,
         }
       ],

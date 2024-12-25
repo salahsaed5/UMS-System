@@ -99,7 +99,7 @@ export default function UsersList() {
                     <td className="px-6 py-4">{user.ein || "N/A"}</td>
                     <td className="px-6 py-4">{user.birthDate}</td>
                     <td className="px-6 py-4 flex gap-2">
-                      <Link to={`/dashboard/updtae-user/${user.id}`}>
+                      <Link to={`/dashboard/update-user/${user.id}`}>
                         <LuPencil size={17} color="#FEAF00" className="cursor-pointer" />
                       </Link>
                       <SlTrash
